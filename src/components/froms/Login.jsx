@@ -1,21 +1,17 @@
 import React from 'react'
 import { LOGIN_URL } from '../../routes/urls'
 import { useAxios } from 'frontend-essentials'
-import { useObjectState } from 'mg-js'
+import { If, useObjectState } from 'mg-js'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const nav = useNavigate()
-    const [form, setForm, reset] = useObjectState(["email", "password"]);
-    const { loading, error, data, activate } = useAxios({
+    const [form, setForm] = useObjectState(["email", "password"]);
+    const { loading, error, status, activate } = useAxios({
         method: 'post',
         url: LOGIN_URL,
-        manual: true,
-        onSuccess: ({ data }) => {
-            console.log(data);
-        }
+        manual: true
     })
-
     const submitForm = (e) => {
         e.preventDefault();
         activate({ data: form })
@@ -35,6 +31,12 @@ const Login = () => {
             </div>
 
             <button type="submit" className="btn btn-primary">Login</button>
+            <If condition={status == 401}>
+                <p className='text-danger text-end'>wrong password</p>
+            </If>
+            <If condition={status == 404}>
+                <p className='text-danger text-end'>user not found</p>
+            </If>
         </form>
     )
     return <h2>loading...</h2>

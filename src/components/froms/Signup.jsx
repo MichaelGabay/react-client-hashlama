@@ -4,10 +4,10 @@ import { SIGN_UP_URL } from '../../routes/urls';
 import { useAxios } from 'frontend-essentials';
 import { useNavigate } from 'react-router-dom';
 
+
 const Signup = () => {
     const nav = useNavigate()
-    const [form, setForm, reset] = useObjectState(["name", "email", "password"]);
-
+    const [form, setForm] = useObjectState(["name", "email", "password"]);
 
     const { loading, error, data, activate, status } = useAxios({
         method: 'post',
@@ -15,10 +15,8 @@ const Signup = () => {
         manual: true,
         onSuccess: () => nav("/login"),
 
+
     })
-
-
-
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -41,7 +39,7 @@ const Signup = () => {
                 <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                 <input value={form.password} onChange={(e) => setForm("password", e.target.value)} type="password" className="form-control" id="exampleInputPassword1" />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">Signup</button>
             <If condition={error && status == 409}>
                 <p className='text-danger text-end'>user alrady exists</p>
             </If>
