@@ -10,11 +10,14 @@ const Login = () => {
     const { loading, error, status, activate } = useAxios({
         method: 'post',
         url: LOGIN_URL,
-        manual: true
+        manual: true,
     })
     const submitForm = (e) => {
         e.preventDefault();
         activate({ data: form })
+    }
+    function testCookies() {
+        activate({ url: "http://localhost:3000/user/showAllConnections", method: "get" })
     }
 
     if (!loading) return (
@@ -37,6 +40,7 @@ const Login = () => {
             <If condition={status == 404}>
                 <p className='text-danger text-end'>user not found</p>
             </If>
+            <button onClick={testCookies}>testCookies</button>
         </form>
     )
     return <h2>loading...</h2>

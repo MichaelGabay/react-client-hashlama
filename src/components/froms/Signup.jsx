@@ -40,7 +40,7 @@ const Signup = () => {
                 <input value={form.password} onChange={(e) => setForm("password", e.target.value)} type="password" className="form-control" id="exampleInputPassword1" />
             </div>
             <button type="submit" className="btn btn-primary">Signup</button>
-            <If condition={error && status == 409}>
+            <If condition={status == 409}>
                 <p className='text-danger text-end'>user alrady exists</p>
             </If>
 

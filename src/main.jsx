@@ -6,7 +6,6 @@ import MainRoutes from './routes/MainRoutes'
 import { axios } from 'frontend-essentials'
 axios.defaults.withCredentials = true
 
-axios.defaults.withCredentials = true
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <MainRoutes />
