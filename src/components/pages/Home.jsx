@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import UserStorage from '../../context/userStore'
 
 const Home = () => {
-    return (
-        <h1>Home</h1>
+    const { user } = useContext(UserStorage)
+    if (user) return (
+        <h1 className='text-center'>hello {user.name}</h1>
     )
+    return <h1 className='text-center'>hello guest</h1>
+
 }
 
 export default Home
