@@ -1,10 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
+import { Link, Outlet } from 'react-router-dom'
 import style from "./NavBarUser.module.css"
-import { Link, Outlet } from "react-router-dom"
-
-
-
-const NavBarUser = () => {
+const NavBarGuest = () => {
     return (
         <>
             <nav className={`navbar navbar-expand-lg bg-body-tertiary ${style.nav}`} >
@@ -16,13 +13,13 @@ const NavBarUser = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/">HOME</Link>
+                                <Link className="nav-link" to="/">HOME</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/logout">LOGOUT</Link>
+                                <Link className="nav-link" to="/signup">SIGNUP</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/myConnections">MY CONNECTIONS</Link>
+                                <Link className="nav-link" to="/login">LOGIN</Link>
                             </li>
                         </ul>
                     </div>
@@ -33,4 +30,4 @@ const NavBarUser = () => {
     )
 }
 
-export default NavBarUser
+export default NavBarGuest

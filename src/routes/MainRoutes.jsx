@@ -7,33 +7,19 @@ import Home from '../components/pages/Home'
 import Logout from '../components/auth/Logout'
 import UserStorage from '../context/userStore'
 import { If } from 'mg-js'
+import UserRoutes from './UserRoutes'
+import GuestRoutes from './GuestRoutes'
+import AdminRoutes from './AdminRoutes'
 
 const MainRoutes = () => {
     const { user } = useContext(UserStorage)
+    if (user?.role == "admin")
+        return <AdminRoutes />
+    if (!user)
+        return <GuestRoutes />
+    if (user)
+        return <UserRoutes />
 
-    return (
-        <>
-            <If condition={user}>
-                <Routes>
-                    <Route path='/' element={<NavBarUser />}>
-                        <Route path='/' element={<Home />} />
-                        <Route path='logout' element={<Logout />} />
-                        <Route path='*' element={<h1 className="text-center">404 not found</h1>} />
-                    </Route>
-                </Routes >
-            </If>
-            <If condition={!user}>
-                <Routes>
-                    <Route path='/' element={<NavBarUser />}>
-                        <Route path='/' element={<Home />} />
-                        <Route path='signup' element={<Signup />} />
-                        <Route path='login' element={<Login />} />
-                        <Route path='*' element={<h1 className="text-center">404 not found</h1>} />
-                    </Route>
-                </Routes>
-            </If>
-        </>
-    )
 }
 
 export default MainRoutes

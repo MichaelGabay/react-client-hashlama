@@ -4,9 +4,25 @@ import UserStorage from './context/userStore'
 import { useAxios } from 'frontend-essentials'
 import { CHECK_CONNECTION_URL } from './routes/urls'
 import Loading from './sherdComponents/loading/Loading'
+import { axios } from 'frontend-essentials'
+import { useNavigate } from 'react-router-dom'
+
+
 
 const App = () => {
     const [user, setUser] = useState(null)
+    const nav = useNavigate()
+    axios.interceptors.response.use(
+        response => response,
+        error => {
+            if (error.response.status === 401) {
+                setUser(null)
+                nav("/login")
+            }
+            return Promise.reject(error);
+        }
+    );
+
     const { loading } = useAxios({
         url: CHECK_CONNECTION_URL,
         method: "get",
