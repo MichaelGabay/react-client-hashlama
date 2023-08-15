@@ -22,9 +22,10 @@ const MyConnections = () => {
     const endConnection = (id) => {
         activate({
             url: END_CONNECTION_URL + `?id=${id}`,
-            onSuccess: (id) => {
+            onSuccess: () => {
                 const afetrDeletingConnection = connections.filter(c => c.tokenId != id);
                 console.log(afetrDeletingConnection);
+
                 setConnections(afetrDeletingConnection)
             }
         })
