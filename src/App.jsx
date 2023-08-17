@@ -3,7 +3,7 @@ import MainRoutes from './routes/MainRoutes'
 import UserStorage from './context/userStore'
 import { useAxios } from 'frontend-essentials'
 import { CHECK_CONNECTION_URL } from './routes/urls'
-import Loading from './sherdComponents/loading/Loading'
+import Loading from './shared/components/loading/Loading'
 import { axios } from 'frontend-essentials'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,17 +12,17 @@ import { useNavigate } from 'react-router-dom'
 const App = () => {
     const [user, setUser] = useState(null)
     const nav = useNavigate()
+    const logout = () => {
+        setUser(null)
+        nav("/login")
+    }
     axios.interceptors.response.use(
         response => response,
         error => {
-            if (error.response.status === 401) {
-                setUser(null)
-                nav("/login")
-            }
+            logout();
             return Promise.reject(error);
         }
     );
-
     const { loading } = useAxios({
         url: CHECK_CONNECTION_URL,
         method: "get",
@@ -30,7 +30,7 @@ const App = () => {
     })
     if (loading) return <Loading />
     return (
-        <UserStorage.Provider value={{ user, setUser }} >
+        <UserStorage.Provider value={{ user, setUser, logout }} >
             <MainRoutes />
         </UserStorage.Provider>
     )

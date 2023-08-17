@@ -1,9 +1,8 @@
 import { If, useObjectState } from 'mg-js'
-import React, { useEffect } from 'react'
 import { SIGN_UP_URL } from '../../routes/urls';
 import { useAxios } from 'frontend-essentials';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../../sherdComponents/loading/Loading';
+import Loading from '../../shared/components/loading/Loading';
 
 
 const Signup = () => {

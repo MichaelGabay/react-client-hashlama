@@ -3,12 +3,10 @@ import { LOGIN_URL } from '../../routes/urls'
 import { useAxios } from 'frontend-essentials'
 import { If, useObjectState } from 'mg-js'
 import { useNavigate } from 'react-router-dom'
-import Loading from "../../sherdComponents/loading/Loading"
+import Loading from "../../shared/components/loading/Loading"
 import UserStorage from '../../context/userStore'
 const Login = () => {
     const { setUser } = useContext(UserStorage)
-
-
     const nav = useNavigate()
     const [form, setForm] = useObjectState(["email", "password"]);
     const { loading, error, status, activate } = useAxios({

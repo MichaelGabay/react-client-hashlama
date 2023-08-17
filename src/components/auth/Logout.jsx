@@ -2,18 +2,16 @@ import { useAxios } from 'frontend-essentials'
 import React, { useContext } from 'react'
 import { LOGOUT_URL } from '../../routes/urls'
 import { useNavigate } from 'react-router-dom'
-import Loading from '../../sherdComponents/loading/Loading'
+import Loading from '../../shared/components/loading/Loading'
 import UserStorage from '../../context/userStore'
 
 const Logout = () => {
-    const { setUser } = useContext(UserStorage);
-    const nav = useNavigate()
+    const { logout } = useContext(UserStorage);
     useAxios({
         method: 'post',
         url: LOGOUT_URL,
         onSuccess: () => {
-            setUser(null)
-            nav("/")
+            logout()
         },
     })
     return (
